@@ -30,6 +30,10 @@ A few test cases have been commented out so that the test suite can function des
 You will notice that upon running minimalchanges.test.ts, two tests will fail when checking the `payerId` parameter from the `promoLedgerEntryRequest`.
 This failure shows that instead of using the `userPurchaseInformation.payer` for the `payerId`, the original function used `userPurchaseInformation.dev`.
 
+# assumpthons.md
+
+This is a list of the assumptions I made while working on this assessment.
+
 # Running tests
 
 ```bash
