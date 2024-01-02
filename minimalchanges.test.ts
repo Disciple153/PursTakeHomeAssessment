@@ -109,7 +109,7 @@ describe("test", () => {
         expect(RDS.executeStatement).toHaveBeenCalledTimes(4);
         expect(RDS.batchExecuteStatement).toHaveBeenCalledTimes(1);
 
-        // All test cases below are likely too detailed, but they do find a bug in the original espto.js.
+        // Most test cases below are likely too detailed, but they do find a bug in the original espto.js.
 
         // Get each request passed into the mocked API calls
         let i: number = 0;
@@ -124,6 +124,10 @@ describe("test", () => {
         testSingleStatementRequest(fedNowRequest, idObj, userPurchaseInformation, sqlTransactionID);
         testSingleStatementRequest(ledgerEntryRequest, idObj, userPurchaseInformation, sqlTransactionID);
         testSingleStatementRequest(promoLedgerEntryRequest, idObj, userPurchaseInformation, sqlTransactionID);
+
+        // Make sure payment status is correct
+        testParameterDouble(paymentRequest.parameters!, 'paymentStatus', 5);
+        testParameterString(paymentRequest.parameters!, 'datePaid', undefined, true);
 
         // Verify that each request used the correct SQL query
         expect(paymentRequest.sql).toBe(INSERT_PAYMENT_SQL);
@@ -185,7 +189,7 @@ describe("test", () => {
         expect(RDS.executeStatement).toHaveBeenCalledTimes(3);
         expect(RDS.batchExecuteStatement).toHaveBeenCalledTimes(1);
 
-        // All test cases below are likely too detailed, but they do find a bug in the original espto.js.
+        // Most test cases below are likely too detailed, but they do find a bug in the original espto.js.
 
         // Get each request passed into the mocked API calls
         let i: number = 0;
@@ -198,6 +202,13 @@ describe("test", () => {
         testSingleStatementRequest(paymentRequest, idObj, userPurchaseInformation, sqlTransactionID);
         testSingleStatementRequest(ledgerEntryRequest, idObj, userPurchaseInformation, sqlTransactionID);
         testSingleStatementRequest(promoLedgerEntryRequest, idObj, userPurchaseInformation, sqlTransactionID);
+
+        // Make sure payment status is correct
+        testParameterDouble(paymentRequest.parameters!, 'paymentStatus', 4);
+        testParameterString(paymentRequest.parameters!, 'datePaid', 
+            new Date().toISOString().slice(0, 19).replace('T', ' '),
+            false
+        );
 
         // Verify that each request used the correct SQL query
         expect(paymentRequest.sql).toBe(INSERT_PAYMENT_SQL);
@@ -257,7 +268,7 @@ describe("test", () => {
         expect(RDS.executeStatement).toHaveBeenCalledTimes(3);
         expect(RDS.batchExecuteStatement).toHaveBeenCalledTimes(1);
 
-        // All test cases below are likely too detailed, but they do find a bug in the original espto.js.
+        // Most test cases below are likely too detailed, but they do find a bug in the original espto.js.
 
         // Get each request passed into the mocked API calls
         let i: number = 0;
@@ -270,6 +281,10 @@ describe("test", () => {
         testSingleStatementRequest(paymentRequest, idObj, userPurchaseInformation, sqlTransactionID);
         testSingleStatementRequest(fedNowRequest, idObj, userPurchaseInformation, sqlTransactionID);
         testSingleStatementRequest(ledgerEntryRequest, idObj, userPurchaseInformation, sqlTransactionID);
+
+        // Make sure payment status is correct
+        testParameterDouble(paymentRequest.parameters!, 'paymentStatus', 5);
+        testParameterString(paymentRequest.parameters!, 'datePaid', undefined, true);
 
         // Verify that each request used the correct SQL query
         expect(paymentRequest.sql).toBe(INSERT_PAYMENT_SQL);
@@ -325,7 +340,7 @@ describe("test", () => {
         expect(RDS.executeStatement).toHaveBeenCalledTimes(2);
         expect(RDS.batchExecuteStatement).toHaveBeenCalledTimes(1);
 
-        // All test cases below are likely too detailed, but they do find a bug in the original espto.js.
+        // Most test cases below are likely too detailed, but they do find a bug in the original espto.js.
 
         // Get each request passed into the mocked API calls
         let i: number = 0;
@@ -337,6 +352,13 @@ describe("test", () => {
         testSingleStatementRequest(paymentRequest, idObj, userPurchaseInformation, sqlTransactionID);
         testSingleStatementRequest(ledgerEntryRequest, idObj, userPurchaseInformation, sqlTransactionID);
 
+        // Make sure payment status is correct
+        testParameterDouble(paymentRequest.parameters!, 'paymentStatus', 4);
+        testParameterString(paymentRequest.parameters!, 'datePaid', 
+            new Date().toISOString().slice(0, 19).replace('T', ' '),
+            false
+        );
+        
         // Verify that each request used the correct SQL query
         expect(paymentRequest.sql).toBe(INSERT_PAYMENT_SQL);
         expect(ledgerEntryRequest.sql).toBe(INSERT_LEDGER_ENTRY_SQL);
