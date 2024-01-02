@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1704222180743" clover="3.2.0">
-  <project timestamp="1704222180743" name="All files">
+<coverage generated="1704225047981" clover="3.2.0">
+  <project timestamp="1704225047982" name="All files">
     <metrics statements="94" coveredstatements="94" conditionals="28" coveredconditionals="28" methods="15" coveredmethods="15" elements="137" coveredelements="137" complexity="0" loc="94" ncloc="94" packages="1" files="2" classes="2"/>
     <file name="espto.ts" path="/mnt/c/Users/c_eps/Documents/Job Search/PursTakeHomeAssessment/espto.ts">
       <metrics statements="44" coveredstatements="44" conditionals="14" coveredconditionals="14" methods="11" coveredmethods="11"/>

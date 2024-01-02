@@ -50,8 +50,6 @@ jest.mock('aws-sdk', () => {
     }
 })
 
-// TODO verify parameters
-
 describe("test", () => {
     const RDS = new AWS.RDSDataService();
 
@@ -59,6 +57,10 @@ describe("test", () => {
     beforeAll(() => {
         process.env.SECRET_ARN = 'TEST_SECRET_ARN';
         process.env.CLUSTER_ARN = 'TEST_CLUSTER_ARN';
+
+        // Freeze the date so that recieved and expected dates match.
+        const mockDate = new Date();
+        jest.spyOn(global, "Date").mockImplementation(() => mockDate);
     });
 
     afterEach(() => {
@@ -208,7 +210,7 @@ describe("test", () => {
         testParameterString(paymentRequest.parameters!, 'datePaid', 
             new Date().toISOString().slice(0, 19).replace('T', ' '),
             false
-        );
+        );        
 
         // Verify that each request used the correct SQL query
         expect(paymentRequest.sql).toBe(INSERT_PAYMENT_SQL);
